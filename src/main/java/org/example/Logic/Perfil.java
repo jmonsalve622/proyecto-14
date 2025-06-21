@@ -1,9 +1,9 @@
 package org.example.Logic;
 
-public class Perfil {
-    private String nombre;
-    private String correo;
-    private int id;
+public abstract class Perfil {
+    protected String nombre;
+    protected String correo;
+    protected int id;
 
     public Perfil(String nombre, String correo, int id) {
         this.nombre = nombre;
