@@ -1,11 +1,11 @@
 package org.example.Logic;
 
-public class Persona {
+public class Perfil {
     private String nombre;
     private String correo;
     private int id;
 
-    public Persona(String nombre, String correo, int id) {
+    public Perfil(String nombre, String correo, int id) {
         this.nombre = nombre;
         this.correo = correo;
     }
