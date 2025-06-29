@@ -8,8 +8,14 @@ public class Calendario {
     public Calendario() {
 
     }
-    
-    public void agregarClase() throws ConflicoDeHorarioException {
 
+    public void agregarClase(Clase clase) throws ConflicoDeHorarioException {
+        for (int i = 0; i < calend.size(); i++) {
+            if (clase.conflictoClase(calend.get(i))) {
+                throw new ConflicoDeHorarioException();
+            }
+        }
+        calend.add(clase);
     }
+
 }
