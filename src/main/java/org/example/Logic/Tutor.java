@@ -10,9 +10,8 @@ public class Tutor extends Perfil {
     private List<String> listaMaterias = new ArrayList<>();
     private List<Horario> listaDisp = new ArrayList<>();
 
-    public Tutor(String nombre, String correo, int id,List<String> listaMaterias, int tarifa, int maxEst, String listaDisp) {
+    public Tutor(String nombre, String correo, int id, int tarifa, int maxEst) {
         super(nombre, correo, id);
-        this.listaMaterias = listaMaterias;
         this.tarifa = tarifa;
         this.maxEst = maxEst;
         //this.listaDisp = listaDisp;    /Deshabilitado hasta saber como hacerlo funcionar
@@ -52,6 +51,15 @@ public class Tutor extends Perfil {
         }
         if (!repetido) {
             listaMaterias.add(materia);
+        }
+    }
+
+    public void agregarHorario(Horario horario) throws ConflicoDeHorarioException {
+        for (Horario h : listaDisp) {
+            if (horario.conflictoTiempo(h)) {
+                throw new ConflicoDeHorarioException();
+            }
+            listaDisp.add(horario);
         }
     }
 }

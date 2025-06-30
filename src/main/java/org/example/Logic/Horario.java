@@ -8,6 +8,12 @@ public class Horario {
     private LocalTime horaInicio;
     private LocalTime horaFin;
 
+    public Horario(DayOfWeek dia, LocalTime horaInicio, LocalTime horaFin) {
+        this.dia = dia;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+    }
+
     private boolean timeBetween(LocalTime x, LocalTime a, LocalTime b) {
         return (x.isAfter(a) || x.equals(a)) && (x.isBefore(b) || x.equals(b));
     }
