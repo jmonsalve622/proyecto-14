@@ -14,7 +14,6 @@ public class Tutor extends Perfil {
         super(nombre, correo, id);
         this.tarifa = tarifa;
         this.maxEst = maxEst;
-        //this.listaDisp = listaDisp;    /Deshabilitado hasta saber como hacerlo funcionar
     }
 
     public int getTarifa() {
