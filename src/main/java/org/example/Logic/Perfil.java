@@ -9,6 +9,7 @@ public abstract class Perfil {
     public Perfil(String nombre, String correo, int id) {
         this.nombre = nombre;
         this.correo = correo;
+        this.id = id;
     }
 
     public String getNombre() {
