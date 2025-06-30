@@ -1,24 +1,35 @@
 package org.example.Logic;
 
-import java.time.LocalDateTime;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 
 public class Horario {
-    private LocalDateTime inicio;
-    private LocalDateTime fin;
+    private DayOfWeek dia;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
 
-    private boolean timeBetween(LocalDateTime x, LocalDateTime a, LocalDateTime b) {
-        return (x.isAfter(a) || x.isEqual(a)) && (x.isBefore(b) || x.isEqual(b));
+    private boolean timeBetween(LocalTime x, LocalTime a, LocalTime b) {
+        return (x.isAfter(a) || x.equals(a)) && (x.isBefore(b) || x.equals(b));
     }
 
     public boolean conflictoTiempo(Horario otroHorario) {
-        return timeBetween(this.inicio, otroHorario.getInicio(), otroHorario.getFin()) || timeBetween(this.fin, otroHorario.getInicio(), otroHorario.getFin()) || timeBetween(otroHorario.getInicio(), this.inicio, this.fin) || timeBetween(otroHorario.getFin(), this.inicio, this.fin);
+        if (otroHorario.getDia().equals(this.dia)) {
+            return timeBetween(this.horaInicio, otroHorario.getHoraInicio(), otroHorario.getHoraFin()) || timeBetween(this.horaFin, otroHorario.getHoraInicio(), otroHorario.getHoraFin()) || timeBetween(otroHorario.getHoraInicio(), this.horaInicio, this.horaFin) || timeBetween(otroHorario.getHoraFin(), this.horaInicio, this.horaFin);
+        }
+        else {
+            return false;
+        }
     }
 
-    public LocalDateTime getInicio() {
-        return inicio;
+    public DayOfWeek getDia() {
+        return dia;
     }
 
-    public LocalDateTime getFin() {
-        return fin;
+    public LocalTime getHoraInicio() {
+        return horaInicio;
+    }
+
+    public LocalTime getHoraFin() {
+        return horaFin;
     }
 }

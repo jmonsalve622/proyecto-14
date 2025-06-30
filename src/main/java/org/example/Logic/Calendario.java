@@ -10,8 +10,8 @@ public class Calendario {
     }
 
     public void agregarClase(Clase clase) throws ConflicoDeHorarioException {
-        for (Clase value : listaClases) {
-            if (clase.getHorario().conflictoTiempo(value.getHorario())) {
+        for (Clase c : listaClases) {
+            if (clase.getHorario().conflictoTiempo(c.getHorario())) {
                 throw new ConflicoDeHorarioException();
             }
         }
