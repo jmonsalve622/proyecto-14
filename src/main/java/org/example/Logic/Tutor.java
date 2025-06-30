@@ -10,8 +10,12 @@ public class Tutor extends Perfil {
     private List<String> listaMaterias = new ArrayList<>();
     private List<Horario> listaDisp = new ArrayList<>();
 
-    public Tutor(String nombre, String correo, int id) {
+    public Tutor(String nombre, String correo, int id,List<String> listaMaterias, int tarifa, int maxEst, String listaDisp) {
         super(nombre, correo, id);
+        this.listaMaterias = listaMaterias;
+        this.tarifa = tarifa;
+        this.maxEst = maxEst;
+        //this.listaDisp = listaDisp;    /Deshabilitado hasta saber como hacerlo funcionar
     }
 
     public int getTarifa() {
