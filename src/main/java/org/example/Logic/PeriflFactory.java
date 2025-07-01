@@ -7,5 +7,5 @@ public abstract class PeriflFactory {
         this.id++;
     }
 
-    public abstract Perfil crearPerfil(PerfilBuilder perfilBuilder);
+    public abstract Perfil crearPerfil(String nombre, String correo);
 }

@@ -37,4 +37,12 @@ public class ListaPerfiles {
         }
         return null;
     }
+
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public List<Tutor> getTutores() {
+        return tutores;
+    }
 }
