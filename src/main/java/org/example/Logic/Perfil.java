@@ -4,7 +4,7 @@ public abstract class Perfil {
     protected String nombre;
     protected String correo;
     protected int id;
-    protected Calendario calend;
+    protected Calendario calend = new Calendario();
 
     public Perfil(String nombre, String correo, int id) {
         this.nombre = nombre;

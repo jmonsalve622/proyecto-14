@@ -1,9 +1,13 @@
 package org.example.Logic;
-import java.util.List;
 
 public class TutorFactory extends PeriflFactory {
-    public Perfil crearPerfil(String nombre, String correo) {
+    public Tutor crearPerfil(String nombre, String correo, int tarifa, int maxEst) {
         this.incId();
-        return new Estudiante(nombre, correo, this.id);
+        return new PerfilBuilder().setNombre(nombre).setCorreo(correo).setId(this.id).setTarifa(tarifa).setMaxEst(maxEst).buildTutor();
+    }
+
+    @Override
+    public Perfil crearPerfil(String nombre, String correo) {
+        return null;
     }
 }

@@ -2,7 +2,6 @@ package org.example.Logic;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Tutor extends Perfil {
     private int tarifa;
