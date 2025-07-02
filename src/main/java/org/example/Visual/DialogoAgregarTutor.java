@@ -1,6 +1,7 @@
 package org.example.Visual;
 
 import org.example.Logic.Tutor;
+import org.example.Logic.TutorFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ public class DialogoAgregarTutor extends JDialog {
     private DefaultListModel<String> modeloMaterias;
     private JList<String> listaMaterias;
 
+    private TutorFactory tutorFactory;
     private boolean guardado = false;
     private Tutor tutorCreado;
 
@@ -103,7 +105,7 @@ public class DialogoAgregarTutor extends JDialog {
                 return;
             }
 
-            tutorCreado = new Tutor(nombre, correo, tarifa, maxEstudiantes, 1);
+            tutorCreado = tutorFactory.crearPerfil(nombre, correo, tarifa, maxEstudiantes);
             guardado = true;
             dispose();
         } catch (NumberFormatException ex) {

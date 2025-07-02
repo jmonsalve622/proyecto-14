@@ -8,6 +8,7 @@ import java.util.List;
 public class PanelEstudiantes extends JPanel {
     private DefaultListModel<Estudiante> modeloEstudiantes;
     private ListaPerfiles gestor;
+    private EstudianteFactory estudianteFactory;
 
     public PanelEstudiantes(ListaPerfiles gestor) {
         this.gestor = gestor;
@@ -46,7 +47,7 @@ public class PanelEstudiantes extends JPanel {
             String correo = campoCorreo.getText().trim();
 
             if (!nombre.isEmpty() && !correo.isEmpty()) {
-                Estudiante nuevo = new Estudiante(nombre, correo, 1);
+                Estudiante nuevo = estudianteFactory.crearPerfil(nombre, correo);
                 gestor.agregarPerfil(nuevo);
                 modeloEstudiantes.addElement(nuevo);
             } else {

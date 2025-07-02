@@ -2,6 +2,7 @@ package org.example.Visual;
 
 import org.example.Logic.ListaPerfiles;
 import org.example.Logic.Tutor;
+import org.example.Logic.TutorFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.*;
 public class PanelTutores extends JPanel {
     private DefaultListModel<String> modeloTutores;
     private ListaPerfiles gestor;
+    private TutorFactory tutorFactory;
     private JFrame parentVentana;
 
     public PanelTutores(ListaPerfiles gestor, JFrame parentVentana) {
