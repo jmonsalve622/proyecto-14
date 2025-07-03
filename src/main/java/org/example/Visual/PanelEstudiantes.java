@@ -10,8 +10,9 @@ public class PanelEstudiantes extends JPanel {
     private ListaPerfiles gestor;
     private EstudianteFactory estudianteFactory;
 
-    public PanelEstudiantes(ListaPerfiles gestor) {
+    public PanelEstudiantes(ListaPerfiles gestor, EstudianteFactory estudianteFactory) {
         this.gestor = gestor;
+        this.estudianteFactory = estudianteFactory;
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Estudiantes"));
 

@@ -15,6 +15,6 @@ public class Estudiante extends Perfil {
 
     @Override
     public String toString() {
-        return id + " - " + getNombre();
+        return getNombre();
     }
 }

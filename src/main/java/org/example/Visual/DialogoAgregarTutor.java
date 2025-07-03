@@ -21,8 +21,9 @@ public class DialogoAgregarTutor extends JDialog {
     private boolean guardado = false;
     private Tutor tutorCreado;
 
-    public DialogoAgregarTutor(JFrame parent) {
+    public DialogoAgregarTutor(JFrame parent, TutorFactory tutorFactory) {
         super(parent, "Agregar Tutor", true);
+        this.tutorFactory = tutorFactory;
         setSize(600, 400);
         setLocationRelativeTo(parent);
         setLayout(new BorderLayout());
@@ -45,7 +46,7 @@ public class DialogoAgregarTutor extends JDialog {
         panelCampos.add(campoMaxEstudiantes);
 
         JButton btnHorarios = new JButton("Definir Horarios Disponibles");
-        // btnHorarios.addActionListener()
+        //btnHorarios.addActionListener() /aun no se usara hasta tener listo el horario
         panelCampos.add(btnHorarios);
         panelCampos.add(new JLabel(""));
 
@@ -106,6 +107,11 @@ public class DialogoAgregarTutor extends JDialog {
             }
 
             tutorCreado = tutorFactory.crearPerfil(nombre, correo, tarifa, maxEstudiantes);
+
+            for (String materia : materias) {
+                tutorCreado.agregarMateria(materia);
+            }
+
             guardado = true;
             dispose();
         } catch (NumberFormatException ex) {

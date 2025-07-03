@@ -12,9 +12,9 @@ public class Ventana extends JFrame {
         this.gestor = gestor;
 
         setTitle("Aplicación de Tutorías");
-        setSize(700, 400);
+        setSize(1000, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocation(500, 300);
+        setLocation(350, 220);
 
         PanelCentral panelCentral = new PanelCentral(gestor, this);
         add(panelCentral);
