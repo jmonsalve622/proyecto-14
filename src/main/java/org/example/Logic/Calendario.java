@@ -1,9 +1,10 @@
 package org.example.Logic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Calendario {
-    private ArrayList<Clase> listaClases = new ArrayList<>();
+    private List<Clase> listaClases = new ArrayList<>();
 
     public Calendario() {
 
@@ -18,4 +19,7 @@ public class Calendario {
         listaClases.add(clase);
     }
 
+    public List<Clase> getListaClases() {
+        return listaClases;
+    }
 }
