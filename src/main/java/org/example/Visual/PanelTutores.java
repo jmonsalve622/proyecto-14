@@ -19,6 +19,7 @@ public class PanelTutores extends JPanel {
     private ListaPerfiles gestor;
     private PanelInfoTutor panelInfo;
     private JFrame frame;
+    private TutorFactory tutorFactory = new TutorFactory();
 
     public PanelTutores(JFrame frame, ListaPerfiles gestor, PanelInfoTutor panelInfo) {
         this.frame = frame;
@@ -42,7 +43,7 @@ public class PanelTutores extends JPanel {
         add(btnAgregarTutor, BorderLayout.NORTH);
 
         btnAgregarTutor.addActionListener(e -> {
-            DialogoAgregarTutor dialogo = new DialogoAgregarTutor(frame, new TutorFactory());
+            DialogoAgregarTutor dialogo = new DialogoAgregarTutor(frame, tutorFactory);
             dialogo.setVisible(true);
 
             if (dialogo.fueGuardado()) {

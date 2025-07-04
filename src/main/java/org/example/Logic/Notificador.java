@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Notificador {
     private List<Observador> observadores = new ArrayList<>();
-
+    
     public void agregarObservador(Observador o) {
         observadores.add(o);
     }
