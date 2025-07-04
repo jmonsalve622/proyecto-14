@@ -13,6 +13,18 @@ public class Clase {
         this.horario = horario;
     }
 
+    public String getMateria() {
+        return materia;
+    }
+
+    public Tutor getTutor() {
+        return tutor;
+    }
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
     public Horario getHorario() {
         return horario;
     }

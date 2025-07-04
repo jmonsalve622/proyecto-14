@@ -1,10 +1,13 @@
 package org.example.Logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Perfil {
     protected String nombre;
     protected String correo;
     protected int id;
-    protected Calendario calend = new Calendario();
+    protected List<Clase> calendario = new ArrayList<>();
 
     public Perfil(String nombre, String correo, int id) {
         this.nombre = nombre;
@@ -22,6 +25,10 @@ public abstract class Perfil {
 
     public int getId() {
         return id;
+    }
+
+    public List<Clase> getCalendario() {
+        return calendario;
     }
 
     public void setNombre(String nombre) {

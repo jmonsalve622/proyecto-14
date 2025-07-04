@@ -1,9 +1,10 @@
 package org.example.Logic;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tutor extends Perfil {
+public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCalendario {
     private int tarifa;
     private int maxEst;
     private List<String> listaMaterias = new ArrayList<>();
@@ -61,4 +62,32 @@ public class Tutor extends Perfil {
         }
         listaDisp.add(horario);
     }
+
+    @Override
+    public void cancelarClase(Clase clase) {
+        for (Clase c : calendario) {
+            if (clase.equals(c)) {
+                calendario.remove(clase);
+            }
+        }
+    }
+
+    @Override
+    public void update(int estudianteId, int tutorId, Clase clase, ClaseAccion claseAccion) {
+        if (tutorId == this.id && claseAccion == ClaseAccion.CANCELAR) {
+            this.cancelarClase(clase);
+        }
+    }
+
+    @Override
+    public List<Clase> filtarCalendario(List<Perfil> estudiantes, List<String> materias, List<DayOfWeek> dias) {
+        List<Clase> resultado = new ArrayList<>();
+        for (Clase c : calendario) {
+            if (estudiantes.contains(c.getEstudiante()) && materias.contains(c.getMateria()) && dias.contains(c.getHorario().getDia())) {
+                resultado.add(c);
+            }
+        }
+        return resultado;
+    }
+
 }
