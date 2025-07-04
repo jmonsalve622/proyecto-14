@@ -40,15 +40,16 @@ public class Tutor extends Perfil {
     }
 
     public void agregarMateria(String materia) {
+        String upperMateria = materia.toUpperCase();
         boolean repetido = false;
         for (String m : listaMaterias) {
-            if (materia.equals(m)) {
+            if (materia.equals(upperMateria)) {
                 repetido = true;
                 break;
             }
         }
         if (!repetido) {
-            listaMaterias.add(materia);
+            listaMaterias.add(upperMateria);
         }
     }
 
