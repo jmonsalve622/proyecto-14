@@ -19,6 +19,14 @@ public class Calendario {
         listaClases.add(clase);
     }
 
+    public void cancelarClase(Clase clase) {
+        for (Clase c : listaClases) {
+            if (clase.equals(c)) {
+                listaClases.remove(clase);
+            }
+        }
+    }
+
     public List<Clase> getListaClases() {
         return listaClases;
     }

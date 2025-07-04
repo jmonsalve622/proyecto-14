@@ -1,6 +1,6 @@
 package org.example.Logic;
 
-public class EstudianteFactory extends PeriflFactory {
+public class EstudianteFactory extends PerfilFactory {
     @Override
     public Estudiante crearPerfil(String nombre, String correo) {
         this.incId();

@@ -1,6 +1,6 @@
 package org.example.Logic;
 
-public abstract class PeriflFactory {
+public abstract class PerfilFactory {
     protected int id = 0;
 
     protected void incId(){
