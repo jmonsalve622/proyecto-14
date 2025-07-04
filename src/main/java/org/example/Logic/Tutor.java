@@ -10,7 +10,7 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
     private List<String> listaMaterias = new ArrayList<>();
     private List<Horario> listaDisp = new ArrayList<>();
 
-    public Tutor(String nombre, String correo, int tarifa, int maxEst, int id) {
+    public Tutor(String nombre, String correo, int id, int tarifa, int maxEst) {
         super(nombre, correo, id);
         this.tarifa = tarifa;
         this.maxEst = maxEst;

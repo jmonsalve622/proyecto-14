@@ -10,15 +10,12 @@ public class PanelCentral extends JPanel {
         setLayout(new GridLayout(1, 2, 20, 0));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        PanelInfoTutor panelInfo = new PanelInfoTutor();
-        PanelTutores panelTutores = new PanelTutores(parentVentana, gestor, panelInfo);
+
+        PanelTutores panelTutores = new PanelTutores(gestor, parentVentana);
         PanelEstudiantes panelEstudiantes = new PanelEstudiantes(gestor, new EstudianteFactory());
 
-        JPanel panelIzquierdo = new JPanel(new BorderLayout());
-        panelIzquierdo.add(panelTutores, BorderLayout.WEST);
-        panelIzquierdo.add(panelInfo, BorderLayout.CENTER);
 
-        add(panelIzquierdo);
+        add(panelTutores);
         add(panelEstudiantes);
     }
 }

@@ -7,24 +7,15 @@ import org.example.Logic.TutorFactory;
 import javax.swing.*;
 import java.awt.*;
 
-import org.example.Logic.ListaPerfiles;
-import org.example.Logic.Tutor;
-import org.example.Logic.TutorFactory;
-
-import javax.swing.*;
-import java.awt.*;
-
 public class PanelTutores extends JPanel {
     private DefaultListModel<String> modeloTutores;
     private ListaPerfiles gestor;
-    private PanelInfoTutor panelInfo;
-    private JFrame frame;
-    private TutorFactory tutorFactory = new TutorFactory();
+    private TutorFactory tutorFactory;
+    private JFrame frame; // Referencia a la ventana principal
 
-    public PanelTutores(JFrame frame, ListaPerfiles gestor, PanelInfoTutor panelInfo) {
-        this.frame = frame;
+    public PanelTutores(ListaPerfiles gestor, JFrame frame) {
         this.gestor = gestor;
-        this.panelInfo = panelInfo;
+        this.frame = frame;
 
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Tutores"));
@@ -43,7 +34,7 @@ public class PanelTutores extends JPanel {
         add(btnAgregarTutor, BorderLayout.NORTH);
 
         btnAgregarTutor.addActionListener(e -> {
-            DialogoAgregarTutor dialogo = new DialogoAgregarTutor(frame, tutorFactory);
+            DialogoAgregarTutor dialogo = new DialogoAgregarTutor(frame, new TutorFactory());
             dialogo.setVisible(true);
 
             if (dialogo.fueGuardado()) {
@@ -61,7 +52,9 @@ public class PanelTutores extends JPanel {
                         .findFirst()
                         .orElse(null);
                 if (seleccionado != null) {
-                    panelInfo.mostrarInfoDeTutor(seleccionado);
+                    // Abre nueva ventana con la información del tutor
+                    DialogoInfoTutor infoDialog = new DialogoInfoTutor(frame, seleccionado);
+                    infoDialog.setVisible(true);
                 }
             }
         });

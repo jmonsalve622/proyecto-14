@@ -2,8 +2,8 @@ package org.example.Logic;
 
 public class TutorFactory extends PerfilFactory {
     public Tutor crearPerfil(String nombre, String correo, int tarifa, int maxEst) {
-        this.incId();
-        return new PerfilBuilder().setNombre(nombre).setCorreo(correo).setId(this.id).setTarifa(tarifa).setMaxEst(maxEst).buildTutor();
+        incId();
+        return new PerfilBuilder().setNombre(nombre).setCorreo(correo).setId(getId()).setTarifa(tarifa).setMaxEst(maxEst).buildTutor();
     }
 
     @Override

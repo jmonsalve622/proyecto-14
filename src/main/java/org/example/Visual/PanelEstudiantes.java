@@ -23,6 +23,16 @@ public class PanelEstudiantes extends JPanel {
         JList<Estudiante> listaEstudiantes = new JList<>(modeloEstudiantes);
         JScrollPane scrollEstudiantes = new JScrollPane(listaEstudiantes);
 
+        listaEstudiantes.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                Estudiante seleccionado = listaEstudiantes.getSelectedValue();
+                if (seleccionado != null) {
+                    DialogoInfoEstudiante infoDialog = new DialogoInfoEstudiante((JFrame) SwingUtilities.getWindowAncestor(this), seleccionado);
+                    infoDialog.setVisible(true);
+                }
+            }
+        });
+
         JButton btnAgregarEstudiante = new JButton("+");
         btnAgregarEstudiante.addActionListener(e -> agregarEstudiante());
 
