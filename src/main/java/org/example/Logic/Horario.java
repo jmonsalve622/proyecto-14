@@ -31,6 +31,10 @@ public class Horario {
         return horaInicio.isBefore(horaFin);
     }
 
+    public boolean contieneHorario(Horario otroHorario) {
+        return timeBetween(otroHorario.horaInicio, this.horaInicio, this.horaFin) && timeBetween(otroHorario.horaFin, this.horaInicio, this.horaFin);
+    }
+
     public DayOfWeek getDia() {
         return dia;
     }
