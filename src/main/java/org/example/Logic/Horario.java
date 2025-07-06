@@ -27,6 +27,10 @@ public class Horario {
         }
     }
 
+    public boolean horarioValido() {
+        return horaInicio.isBefore(horaFin);
+    }
+
     public DayOfWeek getDia() {
         return dia;
     }
