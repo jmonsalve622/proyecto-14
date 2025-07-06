@@ -5,6 +5,10 @@ import org.example.Logic.*;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+Este es el PanelCentral, en este panel es donde se juntan los paneles de estudiantes y tutores en un solo panel
+para la ventana completa
+ */
 public class PanelCentral extends JPanel {
     public PanelCentral(ListaPerfiles gestor, JFrame parentVentana) {
         setLayout(new GridLayout(1, 2, 20, 0));

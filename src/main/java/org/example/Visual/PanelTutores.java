@@ -7,12 +7,24 @@ import org.example.Logic.TutorFactory;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+Este Panel es donde se muestra la lista de Tutores y donde se permite el agregar mas tutores a la lista
+ */
 public class PanelTutores extends JPanel {
+    /*
+    Aca tenemos los privates, los cuales contienen dos listas, una que es la lista de perfiles, la cual contiene el
+    nombre de todos los perfiles creados y su info, la segunda lista es el modelo que sera usado para mostrar en la visual
+    como la lista de tutores, tambien tenemos una instancia al factory de los tutores, por ultimo tenemos un private que
+    representa el valor de una ventana como JFrame
+     */
     private DefaultListModel<String> modeloTutores;
     private ListaPerfiles gestor;
     private TutorFactory tutorFactory;
-    private JFrame frame; // Referencia a la ventana principal
+    private JFrame frame;
 
+    /*
+    El constructor del panel, aca esta agregado el boton de agregar tutores y permite mostrar la lista junto su info
+     */
     public PanelTutores(ListaPerfiles gestor, JFrame frame) {
         this.gestor = gestor;
         this.frame = frame;
@@ -52,7 +64,6 @@ public class PanelTutores extends JPanel {
                         .findFirst()
                         .orElse(null);
                 if (seleccionado != null) {
-                    // Abre nueva ventana con la información del tutor
                     DialogoInfoTutor infoDialog = new DialogoInfoTutor(frame, seleccionado);
                     infoDialog.setVisible(true);
                 }

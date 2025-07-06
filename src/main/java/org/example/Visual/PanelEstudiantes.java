@@ -5,11 +5,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/*
+Este Panel esta encargado de mostrar la lista de estudiantes y tambien permite agregar mas estudiantes a la lista
+ */
 public class PanelEstudiantes extends JPanel {
+    /*
+    Aca estan los privates, los cuales contienen dos listas, una la cual es la lista de perfiles, que contendra los
+    nombres de todos los perfiles creados, incluyendo tutores y estudiantes, la segunda lista es una lista modelo para
+    estudiantes, la cual sera la lista que sera usada para mostrar en la visual como lista de estudiantes.
+    El tercer y ultimo private es una instancia a la clase EstudianteFactory, que es la clase donde permite retornar
+    un objeto Estudiante ya fabricado y pasado por el Builder.
+     */
     private DefaultListModel<Estudiante> modeloEstudiantes;
     private ListaPerfiles gestor;
     private EstudianteFactory estudianteFactory;
 
+    /*
+    Aca esta el constructor del panel, aca es donde esta el boton de agregado de estudiantes y tambien es donde permite
+    la lista de estudiantes y su info
+     */
     public PanelEstudiantes(ListaPerfiles gestor, EstudianteFactory estudianteFactory) {
         this.gestor = gestor;
         this.estudianteFactory = estudianteFactory;
@@ -40,6 +54,10 @@ public class PanelEstudiantes extends JPanel {
         add(btnAgregarEstudiante, BorderLayout.NORTH);
     }
 
+    /*
+    Este metodo esta encargado de mostrar una pequeña ventana donde poner la info del estudiante que sera
+    agregado y asi para finalmente poder agregarlo a la lista
+     */
     private void agregarEstudiante() {
         JTextField campoNombre = new JTextField();
         JTextField campoCorreo = new JTextField();

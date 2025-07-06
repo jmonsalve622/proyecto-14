@@ -5,11 +5,20 @@ import org.example.Logic.TutorFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Esta clase es donde se trabaja con la informacion del tutor, pues aca es donde el administrador proporcionara la info
+que contendra el nuevo perfil del tutor que sera creado
+ */
 public class DialogoAgregarTutor extends JDialog {
+    /*
+    Aca tenemos los privates. pues la mayoria de estos estan encargados de conformar uno de los valores que representara
+    la info del perfil del tutor que sera creado, tambien contiene una instancia a la clase TutorFactory, que es donde
+    se trabaja en la creacion de un nuevo perfil tutor con la informacion que sera ofrecida con los campos
+    rellenados en la ejecucion del codigo
+     */
     private JTextField campoNombre;
     private JTextField campoCorreo;
     private JTextField campoTarifa;
@@ -21,6 +30,11 @@ public class DialogoAgregarTutor extends JDialog {
     private boolean guardado = false;
     private Tutor tutorCreado;
 
+    /*
+    Aca tenemos el constructor, aca es donde se define el tamaño y el como sera proporcionado los campos donde
+    se ingresara la info del nuevo perfil de tutor creado, tambien contiene el boton que permite elegir un horario
+    donde se mostraran a los estudiantes, en que horario trabaja este tutor
+     */
     public DialogoAgregarTutor(JFrame parent, TutorFactory tutorFactory) {
         super(parent, "Agregar Tutor", true);
         this.tutorFactory = tutorFactory;
@@ -89,6 +103,11 @@ public class DialogoAgregarTutor extends JDialog {
         add(panelBotones, BorderLayout.SOUTH);
     }
 
+    /*
+    Este metodo esta encargado de verificar los valores ingresados en los campos, en tal caso de ser valores correctos,
+    entonces este metodo dara su visto bueno y solamente faltara pasar por otro metodo para que este perfil pueda
+    ser guardado
+     */
     private void guardarTutor() {
         try {
             String nombre = campoNombre.getText().trim();
@@ -119,10 +138,17 @@ public class DialogoAgregarTutor extends JDialog {
         }
     }
 
+    /*
+    Este metodo es el que informara a otras clases de que el perfil con el que se esta trabajando, es un perfil adecuado
+    o no, este retornada true si es uno adecuado y false si no es adecuado
+     */
     public boolean fueGuardado() {
         return guardado;
     }
 
+    /*
+    Este metodo es donde se guarda toda la info del perfil del tutor ya creado
+     */
     public Tutor getTutorCreado() {
         return tutorCreado;
     }

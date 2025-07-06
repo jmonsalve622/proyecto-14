@@ -54,6 +54,11 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
         }
     }
 
+    public boolean eliminarMateria(String materia) {
+        String upperMateria = materia.toUpperCase();
+        return listaMaterias.remove(upperMateria);
+    }
+
     public void agregarHorario(Horario horario) throws ConflicoDeHorarioException {
         for (Horario h : listaDisp) {
             if (horario.conflictoTiempo(h)) {
@@ -80,7 +85,7 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
     }
 
     @Override
-    public List<Clase> filtarCalendario(List<Perfil> estudiantes, List<String> materias, List<DayOfWeek> dias) {
+    public List<Clase> filtrarCalendario(List<Perfil> estudiantes, List<String> materias, List<DayOfWeek> dias) {
         List<Clase> resultado = new ArrayList<>();
         for (Clase c : calendario) {
             if (estudiantes.contains(c.getEstudiante()) && materias.contains(c.getMateria()) && dias.contains(c.getHorario().getDia())) {

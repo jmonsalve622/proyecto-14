@@ -46,7 +46,7 @@ public class Estudiante extends Perfil implements AgregarClase, CancelarClase, O
     }
 
     @Override
-    public List<Clase> filtarCalendario(List<Perfil> tutores, List<String> materias, List<DayOfWeek> dias) {
+    public List<Clase> filtrarCalendario(List<Perfil> tutores, List<String> materias, List<DayOfWeek> dias) {
         List<Clase> resultado = new ArrayList<>();
         for (Clase c : calendario) {
             if (tutores.contains(c.getTutor()) && materias.contains(c.getMateria()) && dias.contains(c.getHorario().getDia())) {
