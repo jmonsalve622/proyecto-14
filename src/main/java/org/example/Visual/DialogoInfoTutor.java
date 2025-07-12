@@ -44,6 +44,7 @@ public class DialogoInfoTutor extends JDialog {
         add(panelBotones, BorderLayout.SOUTH);
 
         btnModificar.addActionListener(e -> modificarInfoTutor());
+        btnCalendario.addActionListener(e -> abrirDialogoCalendario());
     }
 
     /*
@@ -63,6 +64,12 @@ public class DialogoInfoTutor extends JDialog {
         }
 
         areaInfo.setText(info.toString());
+    }
+
+
+    private void abrirDialogoCalendario() {
+        DialogoCalendarioTutor dialogoCalendario = new DialogoCalendarioTutor((JFrame) getParent(), tutor);
+        dialogoCalendario.setVisible(true);
     }
 
     /*
