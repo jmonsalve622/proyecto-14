@@ -104,8 +104,8 @@ public class DialogoAgregarTutor extends JDialog {
     }
 
     /*
-    Este metodo esta encargado de verificar los valores ingresados en los campos, en tal caso de ser valores correctos,
-    entonces este metodo dara su visto bueno y solamente faltara pasar por otro metodo para que este perfil pueda
+    Este método está encargado de verificar los valores ingresados en los campos, en tal caso de ser valores correctos,
+    entonces este método dara su visto bueno y solamente faltara pasar por otro método para que este perfil pueda
     ser guardado
      */
     private void guardarTutor() {
@@ -139,7 +139,7 @@ public class DialogoAgregarTutor extends JDialog {
     }
 
     /*
-    Este metodo es el que informara a otras clases de que el perfil con el que se esta trabajando, es un perfil adecuado
+    Este método es el que informara a otras clases de que el perfil con el que se esta trabajando, es un perfil adecuado
     o no, este retornada true si es uno adecuado y false si no es adecuado
      */
     public boolean fueGuardado() {
@@ -147,7 +147,7 @@ public class DialogoAgregarTutor extends JDialog {
     }
 
     /*
-    Este metodo es donde se guarda toda la info del perfil del tutor ya creado
+    Este método es donde se guarda toda la info del perfil del tutor ya creado
      */
     public Tutor getTutorCreado() {
         return tutorCreado;
