@@ -41,6 +41,7 @@ public class DialogoInfoEstudiante extends JDialog {
         add(panelBotones, BorderLayout.SOUTH);
 
         btnModificar.addActionListener(e -> modificarInfoEstudiante());
+        btnCalendario.addActionListener(e -> abrirDialogoCalendario());
     }
 
     /*
@@ -54,6 +55,11 @@ public class DialogoInfoEstudiante extends JDialog {
         info.append("ID: ").append(estudiante.getId()).append("\n");
 
         areaInfo.setText(info.toString());
+    }
+
+    private void abrirDialogoCalendario() {
+        DialogoCalendarioEstudiante dialogoCalendario = new DialogoCalendarioEstudiante((JFrame) getParent(), estudiante);
+        dialogoCalendario.setVisible(true);
     }
 
     /*
