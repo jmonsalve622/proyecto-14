@@ -54,6 +54,10 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
         }
     }
 
+    public void limpiarHorarios() {
+        listaDisp.clear();
+    }
+
     public boolean eliminarMateria(String materia) {
         String upperMateria = materia.toUpperCase();
         return listaMaterias.remove(upperMateria);

@@ -1,12 +1,13 @@
 package org.example.Visual;
 
-import org.example.Logic.Tutor;
-import org.example.Logic.TutorFactory;
+import org.example.Logic.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.time.*;
+import java.util.*;
 import java.util.List;
+
 
 /*
 Esta clase es donde se trabaja con la informacion del tutor, pues aca es donde el administrador proporcionara la info
@@ -25,6 +26,7 @@ public class DialogoAgregarTutor extends JDialog {
     private JTextField campoMaxEstudiantes;
     private DefaultListModel<String> modeloMaterias;
     private JList<String> listaMaterias;
+    private Set<DialogoSeleccionHorario.BloqueHorario> bloquesSeleccionados = new HashSet<>();
 
     private TutorFactory tutorFactory;
     private boolean guardado = false;
@@ -60,7 +62,11 @@ public class DialogoAgregarTutor extends JDialog {
         panelCampos.add(campoMaxEstudiantes);
 
         JButton btnHorarios = new JButton("Definir Horarios Disponibles");
-        //btnHorarios.addActionListener() /aun no se usara hasta tener listo el horario
+        btnHorarios.addActionListener(e -> {
+            DialogoSeleccionHorario dialogo = new DialogoSeleccionHorario(this);
+            dialogo.setVisible(true);
+            bloquesSeleccionados = dialogo.getBloquesSeleccionados();
+        });
         panelCampos.add(btnHorarios);
         panelCampos.add(new JLabel(""));
 
@@ -119,19 +125,32 @@ public class DialogoAgregarTutor extends JDialog {
             for (int i = 0; i < modeloMaterias.size(); i++) {
                 materias.add(modeloMaterias.get(i));
             }
-
             if (nombre.isEmpty() || correo.isEmpty() || materias.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Completa todos los campos y agrega al menos una materia.");
                 return;
             }
-
             tutorCreado = tutorFactory.crearPerfil(nombre, correo, tarifa, maxEstudiantes);
-
             for (String materia : materias) {
                 tutorCreado.agregarMateria(materia);
             }
-
             guardado = true;
+            for (DialogoSeleccionHorario.BloqueHorario bloque : bloquesSeleccionados) {
+                try {
+                    int diaInt = bloque.columna;
+                    if (diaInt < 1 || diaInt > 7) {
+                        System.err.println("Valor inválido de columna para día de la semana: " + diaInt);
+                        continue;
+                    }
+                    DayOfWeek dia = DayOfWeek.of(diaInt);
+                    LocalTime horaInicio = LocalTime.of(8, 15).plusMinutes(60 * bloque.fila);
+                    LocalTime horaFin = horaInicio.plusMinutes(45);
+
+                    Horario h = new Horario(dia, horaInicio, horaFin);
+                    tutorCreado.agregarHorario(h);
+                } catch (ConflicoDeHorarioException ex) {
+                    System.err.println("Conflicto al agregar horario: " + ex.getMessage());
+                }
+            }
             dispose();
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Tarifa y N° de estudiantes deben ser valores válidos.");
