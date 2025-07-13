@@ -58,3 +58,6 @@ a la instancia de Tutor con la que se relacionaba la Clase.
 - Estudiante
 - Tutor
 
+## Decisiones importantes
+
+## Problemas y autocrítica
