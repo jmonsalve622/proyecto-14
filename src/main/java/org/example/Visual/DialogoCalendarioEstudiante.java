@@ -5,12 +5,17 @@ import org.example.Logic.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.Vector;
 
+/*
+Esta clase es la que crea el calendario que sera mostrado en la info de cada estudiante de manera independiente
+ */
 public class DialogoCalendarioEstudiante extends JDialog {
-
+    /*
+    Estos son los privates, estos cumplen con el objetivo de guardar informacion vital y traspasar esa info por el codigo
+    de manera que haga este funcionar el codigo, tambien incluye dos listas que se usaran para representar la visual
+    del calendario como sus horas y dias de manera visual
+     */
     private JTable tablaHorario;
     private DefaultTableModel modeloTabla;
     private Estudiante estudiante;
@@ -25,6 +30,11 @@ public class DialogoCalendarioEstudiante extends JDialog {
             "16:15 - 17:00", "17:15 - 18:00", "18:15 - 19:00", "19:15 - 20:00"
     };
 
+    /*
+    Este es el constructor de la clase, este cumple con la creacion de un calendario en una ventana que con tendra alguna
+    funcionalidad, hasta apretar un boton que te permita elegir uno de los bloques marcados que son las clases libres
+    que tendra algun tutor disponible
+     */
     public DialogoCalendarioEstudiante(JFrame parent, Estudiante estudiante) {
         super(parent, "Calendario del Estudiante", true);
         this.estudiante = estudiante;
@@ -59,7 +69,7 @@ public class DialogoCalendarioEstudiante extends JDialog {
         JButton btnFiltrar = new JButton("Filtrar");
         btnFiltrar.addActionListener(e -> {
         });
-
+        //aun falta hacer el codigo para los botones
         JButton btnBuscarClase = new JButton("Buscar Clase");
         btnBuscarClase.addActionListener(e -> {
         });

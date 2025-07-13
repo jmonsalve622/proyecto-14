@@ -13,8 +13,15 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
+/*
+Esta clase es la que crea el calendario que sera mostrado en la info de cada tutor de manera independiente
+ */
 public class DialogoCalendarioTutor extends JDialog {
-
+    /*
+    Aca tenemos los privates, pues algunos privates son una forma de guardar informacion que se usara en el
+    mismo codigo despues, pero los ultimos dos privates, son unas listas ya hechas de string,
+    estas listas representan lo que se mostrara en la primera fila y columna del calendario, una forma de guiar en el.
+     */
     private JTable tablaHorario;
     private DefaultTableModel modeloTabla;
     private Tutor tutor;
@@ -30,6 +37,10 @@ public class DialogoCalendarioTutor extends JDialog {
             "16:15 - 17:00", "17:15 - 18:00", "18:15 - 19:00", "19:15 - 20:00"
     };
 
+    /*
+    Este es el constructor de la clase, este cumple con la creacion del calendario de manera visual y no tiene alguna forma
+    funcional, a menos que se aprete un boton, que te lleva a un modo en el que se puede modificar este calendario
+     */
     public DialogoCalendarioTutor(JFrame parent, Tutor tutor) {
         super(parent, "Calendario del Tutor", true);
         this.tutor = tutor;
@@ -123,6 +134,10 @@ public class DialogoCalendarioTutor extends JDialog {
         add(panelBotones, BorderLayout.SOUTH);
     }
 
+    /*
+    Estos metodos permiten el obtener la hora de inicio que representa algun bloque
+    y hacer la comparacion entre otros horarios
+     */
     private LocalTime obtenerHoraDesdeFila(int fila) {
         String franja = FRANJAS[fila];
         return LocalTime.parse(franja.split(" - ")[0], FORMATO_HORA);
