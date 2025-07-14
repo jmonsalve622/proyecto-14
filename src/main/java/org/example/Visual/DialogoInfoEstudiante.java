@@ -60,6 +60,9 @@ public class DialogoInfoEstudiante extends JDialog {
         areaInfo.setText(info.toString());
     }
 
+    /*
+    Este metodo te permite abrir la ventana que incluye el calendario del estudiante seleccionado
+     */
     private void abrirDialogoCalendario() {
         DialogoCalendarioEstudiante dialogoCalendario = new DialogoCalendarioEstudiante((JFrame) getParent(), estudiante, listaTutores);
         dialogoCalendario.setVisible(true);

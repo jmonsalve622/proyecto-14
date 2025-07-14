@@ -50,7 +50,7 @@ public class DialogoElegirHorario extends JDialog {
         Set<PanelSeleccionHorario.BloqueHorario> bloques = new HashSet<>();
 
         for (Horario h : listaDisp) {
-            int columna = h.getDia().getValue(); // Lunes=1 ... Domingo=7
+            int columna = h.getDia().getValue();
 
             for (int i = 0; i < PanelSeleccionHorario.FRANJAS.length; i++) {
                 String franja = PanelSeleccionHorario.FRANJAS[i];

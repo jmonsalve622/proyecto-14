@@ -2,11 +2,15 @@ package org.example.Logic;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCalendario {
     private int tarifa;
     private int maxEst;
+    private List<Estudiante> estudiantesAsignados = new ArrayList<>();
+    private Set<TutorObserver> observadores = new HashSet<>();
     private List<String> listaMaterias = new ArrayList<>();
 
     public Tutor(String nombre, String correo, int id, int tarifa, int maxEst) {
@@ -99,5 +103,40 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
             }
         }
         return resultado;
+    }
+
+    public void agregarObserver(TutorObserver obs) {
+        observadores.add(obs);
+    }
+
+    public void eliminarObserver(TutorObserver obs) {
+        observadores.remove(obs);
+    }
+
+    private void notificarObservers() {
+        for (TutorObserver obs : observadores) {
+            obs.onTutorUpdated(this);
+        }
+    }
+
+    public boolean agregarEstudiante(Estudiante e) {
+        if (estudiantesAsignados.size() < maxEst) {
+            estudiantesAsignados.add(e);
+            notificarObservers();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean estaDisponible() {
+        return estudiantesAsignados.size() < maxEst;
+    }
+
+    public int getCuposRestantes() {
+        return maxEst - estudiantesAsignados.size();
+    }
+
+    public List<Estudiante> getEstudiantesAsignados() {
+        return estudiantesAsignados;
     }
 }

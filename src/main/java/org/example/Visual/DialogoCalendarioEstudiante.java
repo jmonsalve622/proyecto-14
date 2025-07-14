@@ -35,7 +35,7 @@ public class DialogoCalendarioEstudiante extends JDialog {
     };
 
     /*
-    Este es el constructor de la clase, este cumple con la creacion de un calendario en una ventana que con tendra alguna
+    Este es el constructor de la clase, este cumple con la creacion de un calendario en una ventana que no tendra alguna
     funcionalidad, hasta apretar un boton que te permita elegir uno de los bloques marcados que son las clases libres
     que tendra algun tutor disponible
      */

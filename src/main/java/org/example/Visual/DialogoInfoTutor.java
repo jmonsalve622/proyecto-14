@@ -71,7 +71,9 @@ public class DialogoInfoTutor extends JDialog {
         areaInfo.setText(info.toString());
     }
 
-
+    /*
+    Este metodo te permite abrir una ventana dentro que incluira el calendario del tutor elegido
+     */
     private void abrirDialogoCalendario() {
         DialogoCalendarioTutor dialogoCalendario = new DialogoCalendarioTutor((JFrame) getParent(), tutor);
         dialogoCalendario.setVisible(true);

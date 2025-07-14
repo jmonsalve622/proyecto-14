@@ -77,8 +77,18 @@ public class PanelSeleccionHorario extends JPanel {
                 int col = tablaHorario.getSelectedColumn();
                 if (col > 0) {
                     BloqueHorario bloque = new BloqueHorario(row, col);
-                    if (!modoRestringido || bloquesDisponibles.contains(bloque)) {
-                        if (bloquesSeleccionados.contains(bloque)) {
+                    boolean yaSeleccionado = bloquesSeleccionados.contains(bloque);
+
+                    if (modoRestringido) {
+                        if (yaSeleccionado) {
+                            bloquesSeleccionados.remove(bloque);
+                            tablaHorario.repaint();
+                        } else if (bloquesDisponibles.contains(bloque)) {
+                            bloquesSeleccionados.add(bloque);
+                            tablaHorario.repaint();
+                        }
+                    } else {
+                        if (yaSeleccionado) {
                             bloquesSeleccionados.remove(bloque);
                         } else {
                             bloquesSeleccionados.add(bloque);

@@ -6,6 +6,7 @@ public class PerfilBuilder {
     private int id;
     private int tarifa;
     private int maxEst;
+    private int actEst= 0;
 
     public PerfilBuilder setNombre(String nombre) {
         this.nombre = nombre;
