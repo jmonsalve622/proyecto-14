@@ -61,3 +61,7 @@ a la instancia de Tutor con la que se relacionaba la Clase.
 ## Decisiones importantes
 
 ## Problemas y autocrítica
+A lo largo del proyecto hubo bastantes problemas, dado que el
+proyecto se hizo en remoto y fue un tanto difícil acoplar partes
+de la lógica en la parte visual. En ese sentido, pudo haber una 
+mejor comunicación y planificación.
