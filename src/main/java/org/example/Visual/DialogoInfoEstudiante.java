@@ -6,19 +6,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Esta clase es la encargada de mostrar la informacion del estudiante y permite si modificarla o echarle un vistazo a su calendario
+ */
 public class DialogoInfoEstudiante extends JDialog {
-    /*
-    Aca tenemos los privates, uno de los cuales sera el area donde se trabajara en mostrar la informacion de
-    uno de los estudiantes seleccionados, el otro private es una instancia a la clase Estudiante
+    /**
+     * @param Privates Aca tenemos los privates, uno de los cuales sera el area donde se trabajara en mostrar la informacion de
+     *                 uno de los estudiantes seleccionados, el otro private es una instancia a la clase Estudiante
      */
     private JTextArea areaInfo;
     private Estudiante estudiante;
     private List<Tutor> listaTutores;
 
-    /*
-    Este es el constructor de la clase, aca es donde se establecera el tamaño de la ventana con la info de los
-    estudiantes, donde tambien se podra modificar la info y ver su calendario, en el que el mismo calendario
-    se podra realizar reservas de clases con los tutores disponibles en los horarios pedidos
+    /**
+     * @param parent es el parametro que representa al frame, osea la ventana que mostrara el codigo
+     * @param estudiante representa a los objetos que son estudiantes en el codigo
+     * @param listaTutores representa a la lista de tutores que seran usados a medida que se crean de estos y agregados dentro
+     * @metodo 'DialogoInfoEstudiante' Este es el constructor de la clase, aca es donde se establecera el tamaño de la ventana con la info de los
+     *                                 estudiantes, donde tambien se podra modificar la info y ver su calendario, en el que el mismo calendario
+     *                                 se podra realizar reservas de clases con los tutores disponibles en los horarios pedidos
      */
     public DialogoInfoEstudiante(Window parent, Estudiante estudiante, List<Tutor> listaTutores){
         super(parent, "Información del Estudiante", ModalityType.APPLICATION_MODAL);
@@ -47,9 +53,9 @@ public class DialogoInfoEstudiante extends JDialog {
         btnCalendario.addActionListener(e -> abrirDialogoCalendario());
     }
 
-    /*
-    Este metodo esta encargado de actualizar el texto con la info actual del estudiante elegido, se actualiza cada vez
-    que se modifica la info, incluyendo la creacion del perfil que cuenta como una actualizacion de la info
+    /**
+     * @metodo 'actualizarTexto' Este metodo esta encargado de actualizar el texto con la info actual del estudiante elegido, se actualiza cada vez
+     *                           que se modifica la info, incluyendo la creacion del perfil que cuenta como una actualizacion de la info
      */
     private void actualizarTexto() {
         StringBuilder info = new StringBuilder();
@@ -60,18 +66,18 @@ public class DialogoInfoEstudiante extends JDialog {
         areaInfo.setText(info.toString());
     }
 
-    /*
-    Este metodo te permite abrir la ventana que incluye el calendario del estudiante seleccionado
+    /**
+     * @metodo 'abrirDialogoCalendario' Este metodo te permite abrir la ventana que incluye el calendario del estudiante seleccionado
      */
     private void abrirDialogoCalendario() {
         DialogoCalendarioEstudiante dialogoCalendario = new DialogoCalendarioEstudiante((JFrame) getParent(), estudiante, listaTutores);
         dialogoCalendario.setVisible(true);
     }
 
-    /*
-    Este metodo es el que hace posible la modificacion de los valores de los estudiantes, valores los cuales
-    estan conformados por solamente el nombre y el correo. Existe el valor de la ID, pero este es un valor
-    el cual no debe modificarse, ya que representa la identificacion de este en la aplicacion
+    /**
+     * @metodo 'modificarInfoEstudiante' Este metodo es el que hace posible la modificacion de los valores de los estudiantes, valores los cuales
+     *                                   estan conformados por solamente el nombre y el correo. Existe el valor de la ID, pero este es un valor
+     *                                   el cual no debe modificarse, ya que representa la identificacion de este en la aplicacion
      */
     private void modificarInfoEstudiante() {
         JTextField campoNombre = new JTextField(estudiante.getNombre());

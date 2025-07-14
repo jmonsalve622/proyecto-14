@@ -16,30 +16,51 @@ public abstract class Perfil {
         this.id = id;
     }
 
+    /**
+     * @return devuelve el nombre del perfil
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * @return devuelve el correo del perfil
+     */
     public String getCorreo() {
         return correo;
     }
 
+    /**
+     * @return devuelve el numerio ID del perfil
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @return devuelve su lista de horario del perfil
+     */
     public List<Horario> getListaDisp() {
         return listaDisp;
     }
 
+    /**
+     * @return devuelve el calendario del perfil
+     */
     public List<Clase> getCalendario() {
         return calendario;
     }
 
+    /**
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * @param correo
+     */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
@@ -66,7 +87,6 @@ public abstract class Perfil {
     }
 
     /**
-     *
      * @return devuelve el nombre del perfil
      */
     @Override

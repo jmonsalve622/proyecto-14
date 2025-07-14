@@ -13,14 +13,14 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
-/*
+/**
 Esta clase es la que crea el calendario que sera mostrado en la info de cada tutor de manera independiente
  */
 public class DialogoCalendarioTutor extends JDialog {
-    /*
-    Aca tenemos los privates, pues algunos privates son una forma de guardar informacion que se usara en el
-    mismo codigo despues, pero los ultimos dos privates, son unas listas ya hechas de string,
-    estas listas representan lo que se mostrara en la primera fila y columna del calendario, una forma de guiar en el.
+    /**
+     * @param Privates Aca tenemos los privates, pues algunos privates son una forma de guardar informacion que se usara en el
+     *                 mismo codigo despues, pero los ultimos dos privates, son unas listas ya hechas de string,
+     *                 estas listas representan lo que se mostrara en la primera fila y columna del calendario, una forma de guiar en el.
      */
     private JTable tablaHorario;
     private DefaultTableModel modeloTabla;
@@ -37,15 +37,19 @@ public class DialogoCalendarioTutor extends JDialog {
             "16:15 - 17:00", "17:15 - 18:00", "18:15 - 19:00", "19:15 - 20:00"
     };
 
-    /*
-    Este es el constructor de la clase, este cumple con la creacion del calendario de manera visual y no tiene alguna forma
-    funcional, a menos que se aprete un boton, que te lleva a un modo en el que se puede modificar este calendario
+    /**
+     * @param frame es el parametro que representa al frame, osea la ventana que mostrara el codigo
+     * @param tutor este representa a los objetos que son tutores
+     * @metodo 'DialogoCalendarioTutor' Este es el constructor de la clase, este cumple con la creacion del calendario de manera visual y no tiene alguna forma
+     *     funcional, a menos que se aprete un boton, que te lleva a un modo en el que se puede modificar este calendario,
+     *     este modo de modificacion, te lleva a otro calendario del que esta encargado otra clase, pues este es solo
+     *     el calendario que muestra la visual de la informacion recibida de otro calendario
      */
-    public DialogoCalendarioTutor(JFrame parent, Tutor tutor) {
-        super(parent, "Calendario del Tutor", true);
+    public DialogoCalendarioTutor(JFrame frame, Tutor tutor) {
+        super(frame, "Calendario del Tutor", true);
         this.tutor = tutor;
         setSize(1000, 500);
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(frame);
         setLayout(new BorderLayout());
 
         modeloTabla = new DefaultTableModel(COLUMNAS, 0);
@@ -133,19 +137,34 @@ public class DialogoCalendarioTutor extends JDialog {
         add(panelBotones, BorderLayout.SOUTH);
     }
 
-    /*
-    Estos metodos permiten el obtener la hora de inicio que representa algun bloque
-    y hacer la comparacion entre otros horarios
+    /**
+     * @metodo Estos metodos permiten el obtener la hora de inicio que representa algun bloque
+     *     y hacer la comparacion entre otros horarios
+     */
+
+    /**
+     * @param fila representa las filas del calendario
+     * @return, este retorna la hora de la fila que fue elegida anteriormente
      */
     private LocalTime obtenerHoraDesdeFila(int fila) {
         String franja = FRANJAS[fila];
         return LocalTime.parse(franja.split(" - ")[0], FORMATO_HORA);
     }
 
+    /**
+     * @param x, tiempo que se quiere comprobar si está entre a y b
+     * @param a, tiempo inicial del rango comparable
+     * @param b tiempo final del rango comparable
+     * @return valor de verdad si x está entre a y b
+     */
     private boolean timeBetween(LocalTime x, LocalTime a, LocalTime b) {
         return (x.equals(a) || x.isAfter(a)) && x.isBefore(b);
     }
 
+    /**
+     * @param hora representa la hora que sera procesada y verificada
+     * @return, una verificacion si el proceso se hizo correctamente o no
+     */
     private int obtenerFilaDesdeHora(LocalTime hora) {
         for (int i = 0; i < FRANJAS.length; i++) {
             String franja = FRANJAS[i];

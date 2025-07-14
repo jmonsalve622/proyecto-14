@@ -9,18 +9,39 @@ import java.time.*;
 import java.util.*;
 import java.util.List;
 
+/**
+Esta clase es la que muestra la lista de tutores en la parte de la ventana de los estudiantes, esta lista solamente
+podra ser vista desde la gestion de un perfil de estudiante
+ */
 public class DialogoListaTutores extends JDialog implements TutorObserver {
+    /**
+     * @param Privates Estos son los privates, pues el primero es una lista, donde iran guardados los objetos tutores dentro que seran
+     *                 usados, tambien hay una instancia a un objeto que sera modelo de un estudiante, por ultimo estan las creaciones
+     *                 de los botones que estaran dentro de esta ventana.
+     */
     private JList<Tutor> lista;
     private JButton btnVerInfo;
     private JButton btnElegirHorario;
     private Estudiante estudiante;
 
-    public DialogoListaTutores(JFrame parent, List<Tutor> tutores, Estudiante estudiante) {
-        super(parent, "Lista de Tutores", true);
+    /**
+     * @param frame es el parametro que representa al frame, osea la ventana que mostrara el codigo
+     * @param tutores representa a los objetos que son tutores
+     * @param estudiante representa a los objetos que son estudiantes
+     * @metodo 'DialogoListaTutores' Este es el constructor de la clase, este crea los detalles de la ventana, su altura, la escritura y por supuesto,
+     *     su contenido, la cual es la lista de tutores, el constructor tambien construye dos botones que tendran su propia
+     *     funcion, uno sera ver la informacion de un pertil de algun tutor elegido, por ultimo, el otro boton tiene la
+     *     funcion de elegir un horario de disponibilidad de algun tutor elegido, pero eso esta en otra clase,
+     *     pues aca solo esta el boton con la instacia, pero eso ayuda a colocar otras restricciones como la cantidad
+     *     maxima de estudiantes, pues un estudiante tiene permitido elegir solamente a un tutor de la lista, aunque ese tutor
+     *     puede ser compartido
+     */
+    public DialogoListaTutores(JFrame frame, List<Tutor> tutores, Estudiante estudiante) {
+        super(frame, "Lista de Tutores", true);
         this.estudiante = estudiante;
 
         setSize(300, 450);
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(frame);
         setLayout(new BorderLayout());
 
         lista = new JList<>(new DefaultListModel<>());
@@ -43,7 +64,7 @@ public class DialogoListaTutores extends JDialog implements TutorObserver {
         btnVerInfo.addActionListener(e -> {
             Tutor seleccionado = lista.getSelectedValue();
             if (seleccionado != null) {
-                new DialogoInfoTutor(parent, seleccionado, true).setVisible(true);
+                new DialogoInfoTutor(frame, seleccionado, true).setVisible(true);
             }
         });
 
@@ -68,7 +89,7 @@ public class DialogoListaTutores extends JDialog implements TutorObserver {
                 bloquesDisponibles.add(new PanelSeleccionHorario.BloqueHorario(fila, columna));
             }
 
-            DialogoSeleccionHorario dialogo = new DialogoSeleccionHorario(parent, bloquesDisponibles);
+            DialogoSeleccionHorario dialogo = new DialogoSeleccionHorario(frame, bloquesDisponibles);
             dialogo.setModoRestringido(bloquesDisponibles);
             dialogo.setVisible(true);
 
@@ -100,11 +121,7 @@ public class DialogoListaTutores extends JDialog implements TutorObserver {
 
         lista.addListSelectionListener(e -> {
             Tutor seleccionado = lista.getSelectedValue();
-            boolean puedeEditar = seleccionado != null &&
-                    (seleccionado.getEstudiantesAsignados().contains(estudiante) ||
-                            (!estudianteYaTieneTutor(tutores) && seleccionado.estaDisponible()));
-
-            btnElegirHorario.setEnabled(puedeEditar);
+            btnElegirHorario.setEnabled(seleccionado != null);
         });
 
         panelBotones.add(btnVerInfo);
@@ -112,6 +129,14 @@ public class DialogoListaTutores extends JDialog implements TutorObserver {
         add(panelBotones, BorderLayout.SOUTH);
     }
 
+    /**
+     * @metodo Abajo tenemos algunos metodos, los cuales estan encargador principalmente de verificar la seleccion de un tutor y
+     *         por ultimo, la restriccion de la cantidad maxima de estudiante y tutores que pueden tener estos
+     */
+
+    /**
+     * @param tutorActualizado representa a un tutor, pues este sera el tutor que sera verificado en el metodo
+     */
     @Override
     public void onTutorUpdated(Tutor tutorActualizado) {
         Tutor seleccionado = lista.getSelectedValue();
@@ -122,6 +147,10 @@ public class DialogoListaTutores extends JDialog implements TutorObserver {
         }
     }
 
+    /**
+     * @param tutores representa a los objetos que son tutores
+     * @return, este retorna el visto bueno o no, dependiendo de los valores y si son correctos
+     */
     private boolean estudianteYaTieneTutor(List<Tutor> tutores) {
         for (Tutor t : tutores) {
             if (t.getEstudiantesAsignados().contains(estudiante)) {
@@ -129,14 +158,5 @@ public class DialogoListaTutores extends JDialog implements TutorObserver {
             }
         }
         return false;
-    }
-
-    private Tutor getTutorDelEstudiante(List<Tutor> tutores) {
-        for (Tutor t : tutores) {
-            if (t.getEstudiantesAsignados().contains(estudiante)) {
-                return t;
-            }
-        }
-        return null;
     }
 }

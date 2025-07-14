@@ -9,16 +9,16 @@ import java.util.*;
 import java.util.List;
 
 
-/*
+/**
 Esta clase es donde se trabaja con la informacion del tutor, pues aca es donde el administrador proporcionara la info
 que contendra el nuevo perfil del tutor que sera creado
  */
 public class DialogoAgregarTutor extends JDialog {
-    /*
-    Aca tenemos los privates. pues la mayoria de estos estan encargados de conformar uno de los valores que representara
-    la info del perfil del tutor que sera creado, tambien contiene una instancia a la clase TutorFactory, que es donde
-    se trabaja en la creacion de un nuevo perfil tutor con la informacion que sera ofrecida con los campos
-    rellenados en la ejecucion del codigo
+    /**
+     * @param Privates Aca tenemos los privates. pues la mayoria de estos estan encargados de conformar uno de los valores que representara
+     *     la info del perfil del tutor que sera creado, tambien contiene una instancia a la clase TutorFactory, que es donde
+     *     se trabaja en la creacion de un nuevo perfil tutor con la informacion que sera ofrecida con los campos
+     *     rellenados en la ejecucion del codigo
      */
     private JTextField campoNombre;
     private JTextField campoCorreo;
@@ -33,16 +33,18 @@ public class DialogoAgregarTutor extends JDialog {
     private Tutor tutorCreado;
     private JFrame ventanaPrincipal;
 
-    /*
-    Aca tenemos el constructor, aca es donde se define el tamaño y el como sera proporcionado los campos donde
-    se ingresara la info del nuevo perfil de tutor creado, tambien contiene el boton que permite elegir un horario
-    donde se mostraran a los estudiantes, en que horario trabaja este tutor
+    /**
+     * @param frame es el parametro que representa al frame, osea la ventana que mostrara el codigo
+     * @param tutorFactory es una instancia, el cual este parametro tiene la funcion de crear tutores desde su fabrica
+     * @metodo 'DialogoAgregarTutor' Aca tenemos el constructor, aca es donde se define el tamaño y el como sera proporcionado los campos donde
+     *     se ingresara la info del nuevo perfil de tutor creado, tambien contiene el boton que permite elegir un horario
+     *     donde se mostraran a los estudiantes, en que horario trabaja este tutor
      */
-    public DialogoAgregarTutor(JFrame parent, TutorFactory tutorFactory) {
-        super(parent, "Agregar Tutor", true);
+    public DialogoAgregarTutor(JFrame frame, TutorFactory tutorFactory) {
+        super(frame, "Agregar Tutor", true);
         this.tutorFactory = tutorFactory;
         setSize(600, 400);
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(frame);
         setLayout(new BorderLayout());
 
         JPanel panelCampos = new JPanel(new GridLayout(5, 2, 10, 10));
@@ -110,10 +112,10 @@ public class DialogoAgregarTutor extends JDialog {
         add(panelBotones, BorderLayout.SOUTH);
     }
 
-    /*
-    Este método está encargado de verificar los valores ingresados en los campos, en tal caso de ser valores correctos,
-    entonces este método dara su visto bueno y solamente faltara pasar por otro método para que este perfil pueda
-    ser guardado
+    /**
+     * @metodo 'guardarTutor' Este método está encargado de verificar los valores ingresados en los campos, en tal caso de ser valores correctos,
+     *                        entonces este método dara su visto bueno y solamente faltara pasar por otro método para que este perfil pueda
+     *                        ser guardado
      */
     private void guardarTutor() {
         try {
@@ -158,16 +160,18 @@ public class DialogoAgregarTutor extends JDialog {
         }
     }
 
-    /*
-    Este método es el que informara a otras clases de que el perfil con el que se esta trabajando, es un perfil adecuado
-    o no, este retornada true si es uno adecuado y false si no es adecuado
+    /**
+     * @return, este retorna un false o true, dependiendo de lo recibido
+     * @metodo 'fueGuardado' Este método es el que informara a otras clases de que el perfil con el que se esta trabajando, es un perfil adecuado
+     *     o no, este retornada true si es uno adecuado y false si no es adecuado
      */
     public boolean fueGuardado() {
         return guardado;
     }
 
-    /*
-    Este método es donde se guarda toda la info del perfil del tutor ya creado
+    /**
+     * @return, este retorna la informacion del tutor creado
+     * @metodo 'getTutorCreado' Este método es donde se guarda toda la info del perfil del tutor ya creado
      */
     public Tutor getTutorCreado() {
         return tutorCreado;

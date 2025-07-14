@@ -9,7 +9,6 @@ import java.util.Set;
 public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCalendario {
     private int tarifa;
     private int maxEst;
-    private int actEst= 0;
     private List<Estudiante> estudiantesAsignados = new ArrayList<>();
     private Set<TutorObserver> observadores = new HashSet<>();
     private List<String> listaMaterias = new ArrayList<>();
@@ -44,7 +43,7 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
         String upperMateria = materia.toUpperCase();
         boolean repetido = false;
         for (String m : listaMaterias) {
-            if (materia.equals(upperMateria)) {
+            if (m.equals(upperMateria)) {
                 repetido = true;
                 break;
             }

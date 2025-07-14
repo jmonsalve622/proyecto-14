@@ -5,30 +5,32 @@ import org.example.Logic.*;
 import javax.swing.*;
 import java.awt.*;
 
-/*
+/**
 Esta clase esta encargada de mostrar la ventana con la informacion del tutor seleccionado en la lista de tutores
  */
 public class DialogoInfoTutor extends JDialog {
-    /*
-    Se usara un private que referira al area donde se mostrara la info.
-    Tambien tenemos una instancia a la clase Tutor donde se usaran sus metodos aca
+    /**
+     * @param Privates Se usara un private que referira al area donde se mostrara la info.
+     *                 Tambien tenemos una instancia a la clase Tutor donde se usaran sus metodos aca
      */
     private JTextArea areaInfo;
     private Tutor tutor;
-    private boolean soloLectura;
 
-    /*
-    Este es el constructor de la clase, aca es donde se establecera el tamaño de la ventana con la info del tutor y
-    donde tambien se podra modificar la info y ver su calendario, en el que el mismo calendario se podra filtrar
-    las mismas clases que tendra el tutor con los estudiantes
+    /**
+     * @param frame es el parametro que representa al frame, osea la ventana que mostrara el codigo
+     * @param tutor representa a los objetos que son tutores
+     * @param soloLectura es el valor que indicara mas que nada si la info del tutor esta siendo vista desde un tutor o estudiante,
+     *                    si este es vista por tutor, no pasa nada, pero en caso de un estudiante, este se bloqueara
+     * @metodo 'DialogoInfoTutor' Este es el constructor de la clase, aca es donde se establecera el tamaño de la ventana con la info del tutor y
+     *     donde tambien se podra modificar la info y ver su calendario, en el que el mismo calendario se podra filtrar
+     *     las mismas clases que tendra el tutor con los estudiantes
      */
-    public DialogoInfoTutor(JFrame parent, Tutor tutor, boolean soloLectura) {
-        super(parent, "Información del Tutor", true);
+    public DialogoInfoTutor(JFrame frame, Tutor tutor, boolean soloLectura) {
+        super(frame, "Información del Tutor", true);
         this.tutor = tutor;
-        this.soloLectura = soloLectura;
 
         setSize(400, 300);
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(frame);
         setLayout(new BorderLayout());
 
         areaInfo = new JTextArea();
@@ -52,9 +54,9 @@ public class DialogoInfoTutor extends JDialog {
         add(panelBotones, BorderLayout.SOUTH);
     }
 
-    /*
-    Este metodo esta encargado de actualizar el texto con la info actual del tutor guardado, se actualiza cada vez
-    que se modifica la info, incluyendo la creacion del perfil
+    /**
+     * @metodo 'actualizarTexto' Este metodo esta encargado de actualizar el texto con la info actual del tutor guardado, se actualiza cada vez
+     *                           que se modifica la info, incluyendo la creacion del perfil
      */
     private void actualizarTexto() {
         StringBuilder info = new StringBuilder();
@@ -71,17 +73,17 @@ public class DialogoInfoTutor extends JDialog {
         areaInfo.setText(info.toString());
     }
 
-    /*
-    Este metodo te permite abrir una ventana dentro que incluira el calendario del tutor elegido
+    /**
+     * @metodo 'abrirDialogoCalendario' Este metodo te permite abrir una ventana dentro que incluira el calendario del tutor elegido
      */
     private void abrirDialogoCalendario() {
         DialogoCalendarioTutor dialogoCalendario = new DialogoCalendarioTutor((JFrame) getParent(), tutor);
         dialogoCalendario.setVisible(true);
     }
 
-    /*
-    Este metodo es el que hace posible la modificacion de los valores del tutor como su nombre, correo, tarifa, maxEst
-    y las materias que contiene este
+    /**
+     * @metodo 'modificarInfoTutor' Este metodo es el que hace posible la modificacion de los valores del tutor como su nombre, correo, tarifa, maxEst
+     *                              y las materias que contiene este
      */
     private void modificarInfoTutor() {
         JTextField campoNombre = new JTextField(tutor.getNombre());

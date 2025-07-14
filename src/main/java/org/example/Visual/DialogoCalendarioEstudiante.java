@@ -10,19 +10,18 @@ import java.time.format.*;
 import java.util.Vector;
 import java.util.List;
 
-/*
+/**
 Esta clase es la que crea el calendario que sera mostrado en la info de cada estudiante de manera independiente
  */
 public class DialogoCalendarioEstudiante extends JDialog {
-    /*
-    Estos son los privates, estos cumplen con el objetivo de guardar informacion vital y traspasar esa info por el codigo
-    de manera que haga este funcionar el codigo, tambien incluye dos listas que se usaran para representar la visual
-    del calendario como sus horas y dias de manera visual
+    /**
+     * @param Privates Estos son los privates, estos cumplen con el objetivo de guardar informacion vital y traspasar esa info por el codigo
+     *     de manera que haga este funcionar el codigo, tambien incluye dos listas que se usaran para representar la visual
+     *     del calendario como sus horas y dias de manera visual
      */
     private JTable tablaHorario;
     private DefaultTableModel modeloTabla;
     private Estudiante estudiante;
-    private List<Tutor> listaTutores;
 
     private static final String[] COLUMNAS = {
             "Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"
@@ -34,17 +33,19 @@ public class DialogoCalendarioEstudiante extends JDialog {
             "16:15 - 17:00", "17:15 - 18:00", "18:15 - 19:00", "19:15 - 20:00"
     };
 
-    /*
-    Este es el constructor de la clase, este cumple con la creacion de un calendario en una ventana que no tendra alguna
-    funcionalidad, hasta apretar un boton que te permita elegir uno de los bloques marcados que son las clases libres
-    que tendra algun tutor disponible
+    /**
+     * @param frame es el parametro que representa al frame, osea la ventana que mostrara el codigo
+     * @param estudiante representa a los objetos que son estudiantes en el codigo
+     * @param listaTutores representa a la lista de tutores que seran usados a medida que se crean de estos y agregados dentro
+     * @metodo 'DialogoCalendarioEstudiante' Este es el constructor de la clase, este cumple con la creacion de un calendario en una ventana que no tendra alguna
+     *     funcionalidad, hasta apretar un boton que te permita elegir uno de los bloques marcados que son las clases libres
+     *     que tendra algun tutor disponible
      */
-    public DialogoCalendarioEstudiante(JFrame parent, Estudiante estudiante, List<Tutor> listaTutores) {
-        super(parent, "Calendario del Estudiante", true);
+    public DialogoCalendarioEstudiante(JFrame frame, Estudiante estudiante, List<Tutor> listaTutores) {
+        super(frame, "Calendario del Estudiante", true);
         this.estudiante = estudiante;
-        this.listaTutores = listaTutores;
         setSize(1000, 500);
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(frame);
         setLayout(new BorderLayout());
 
         modeloTabla = new DefaultTableModel(COLUMNAS, 0);
@@ -91,6 +92,8 @@ public class DialogoCalendarioEstudiante extends JDialog {
 
         JButton btnVerClase = new JButton("Ver Clases");
         btnVerClase.addActionListener(e -> {
+            DialogoVerClases dialogo = new DialogoVerClases((JFrame) SwingUtilities.getWindowAncestor(this), estudiante);
+            dialogo.setVisible(true);
         });
 
         JButton btnBuscarClase = new JButton("Buscar Clase");
@@ -104,11 +107,27 @@ public class DialogoCalendarioEstudiante extends JDialog {
         add(panelBotones, BorderLayout.SOUTH);
     }
 
+    /**
+     * @metodo Estos metodos son utiles cuando se trata de trabajar en la parte del horario en la ejecucion del codigo,
+     *     pues estos trabajan en la obtencion de la hora
+     */
+
+
+    /**
+     * @param fila representa las filas del calendario
+     * @return, este retorna la hora de la fila que fue elegida anteriormente
+     */
     private LocalTime obtenerHoraDesdeFila(int fila) {
         String franja = FILAS[fila];
         return LocalTime.parse(franja.split(" - ")[0], DateTimeFormatter.ofPattern("H:mm"));
     }
 
+    /**
+     * @param x, tiempo que se quiere comprobar si está entre a y b
+     * @param a, tiempo inicial del rango comparable
+     * @param b tiempo final del rango comparable
+     * @return valor de verdad si x está entre a y b
+     */
     private boolean timeBetween(LocalTime x, LocalTime a, LocalTime b) {
         return (x.equals(a) || x.isAfter(a)) && x.isBefore(b);
     }

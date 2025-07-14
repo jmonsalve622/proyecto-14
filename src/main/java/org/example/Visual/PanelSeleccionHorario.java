@@ -8,14 +8,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
 
-/*
+/**
 Esta clase esta encargada de permitir la eleccion de un horario para un perfil
  */
 public class PanelSeleccionHorario extends JPanel {
+    /**
+     * @param Privates Aca tenemos los privates de la clase, pues principalmente hay privates con la funcionalidad de guardar informacion
+     *                 util que sera usado en esta misma clase del codigo, pero lo importante tambien son las dos ultimas listas, pues
+     *                 estos contienes los string que seran mostrados para guiar de manera visual el calendario que sera mostrado en
+     *                 los perfiles
+     */
     private JTable tablaHorario;
     private DefaultTableModel modeloTabla;
     private Set<BloqueHorario> bloquesDisponibles = new HashSet<>();
     private boolean modoRestringido = false;
+    private Set<BloqueHorario> bloquesSeleccionados = new HashSet<>();
 
     private static final String[] COLUMNAS = {
             "Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"
@@ -27,8 +34,12 @@ public class PanelSeleccionHorario extends JPanel {
             "16:15 - 17:00", "17:15 - 18:00", "18:15 - 19:00", "19:15 - 20:00"
     };
 
-    private Set<BloqueHorario> bloquesSeleccionados = new HashSet<>();
-
+    /**
+     * @metodo PanelSeleccionHorario Este es el constructor de la clase, aca es donde se fabrica el panel que mostrara
+     *                               un calendario, pero este calendario sera funcional, pues este se le podra marcar
+     *                               casillas que son bloques de horario y estos bloques seran guardados dentro de sus
+     *                               respectivos perfiles, esta clase esta hecho tanto para tutores como estudiantes
+     */
     public PanelSeleccionHorario() {
         setLayout(new BorderLayout());
 
@@ -102,10 +113,17 @@ public class PanelSeleccionHorario extends JPanel {
         add(new JScrollPane(tablaHorario), BorderLayout.CENTER);
     }
 
+    /**
+     * @return bloquesSeleccionados estos son los bloques que seran guardados
+     */
     public Set<BloqueHorario> getBloquesSeleccionados() {
         return bloquesSeleccionados;
     }
 
+    /**
+     * @param bloques Son los bloques de las casillas de forma general, pues este metodo
+     *                los convierte en 'bloques seleccionados' al ser seleccionados
+     */
     public void setBloquesSeleccionados(Set<BloqueHorario> bloques) {
         this.bloquesSeleccionados.clear();
         if (bloques != null) {
@@ -118,12 +136,20 @@ public class PanelSeleccionHorario extends JPanel {
         tablaHorario.repaint();
     }
 
+    /**
+     * @param bloquesTutor son los bloques que fueron guardados antes en el calendario tutor, pues este metodo fue
+     *                     creado para restringir al estudiantes de modificar el calendario del tutor, ya que
+     *                     dentro del codigo, el estudiante necesita acceso a su calendario para elegir una hora
+     */
     public void setModoRestringido(Set<BloqueHorario> bloquesTutor) {
         this.bloquesDisponibles = bloquesTutor;
         this.modoRestringido = true;
         tablaHorario.repaint();
     }
 
+    /**
+     * @metodo BloqueHorario Pues este es el metodo que define exactamente lo que es un bloque de horario
+     */
     public static class BloqueHorario {
         public int fila;
         public int columna;

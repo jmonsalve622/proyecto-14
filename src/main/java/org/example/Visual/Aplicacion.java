@@ -4,7 +4,7 @@ import org.example.Logic.*;
 
 import javax.swing.*;
 
-/*
+/**
 Esta clase es la que se encarga de inicializar la aplicacion por completo, contiene una instancia a la clase Ventana
  */
 public class Aplicacion {
