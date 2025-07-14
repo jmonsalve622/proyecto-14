@@ -57,7 +57,7 @@ public class DialogoAgregarTutor extends JDialog {
         panelCampos.add(campoNombre);
         panelCampos.add(new JLabel("Correo:"));
         panelCampos.add(campoCorreo);
-        panelCampos.add(new JLabel("Tarifa: $"));
+        panelCampos.add(new JLabel("Tarifa ($/h): "));
         panelCampos.add(campoTarifa);
         panelCampos.add(new JLabel("N° máx. de estudiantes:"));
         panelCampos.add(campoMaxEstudiantes);
