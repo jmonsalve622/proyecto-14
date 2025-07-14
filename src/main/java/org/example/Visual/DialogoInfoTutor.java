@@ -61,7 +61,7 @@ public class DialogoInfoTutor extends JDialog {
         info.append("Nombre: ").append(tutor.getNombre()).append("\n");
         info.append("Correo: ").append(tutor.getCorreo()).append("\n");
         info.append("ID: ").append(tutor.getId()).append("\n");
-        info.append("Tarifa: $").append(tutor.getTarifa()).append("\n");
+        info.append("Tarifa: $").append(tutor.getTarifa()).append("/h\n");
         info.append("Máx. Estudiantes: ").append(tutor.getMaxEst()).append("\n");
         info.append("Materias:\n");
         for (String materia : tutor.getListaMaterias()) {
