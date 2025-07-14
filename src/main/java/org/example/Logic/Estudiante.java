@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Estudiante extends Perfil implements AgregarClase, CancelarClase, Observador, FiltroCalendario {
+    private List<Horario> listaDisp = new ArrayList<>();
+
     public Estudiante(String nombre, String correo, int id) {
         super(nombre, correo, id);
     }
@@ -79,5 +81,22 @@ public class Estudiante extends Perfil implements AgregarClase, CancelarClase, O
     @Override
     public String toString() {
         return getNombre();
+    }
+
+    public void agregarHorario(Horario horario) throws ConflicoDeHorarioException {
+        for (Horario h : listaDisp) {
+            if (horario.conflictoTiempo(h)) {
+                throw new ConflicoDeHorarioException();
+            }
+        }
+        listaDisp.add(horario);
+    }
+
+    public void limpiarHorarios() {
+        listaDisp.clear();
+    }
+
+    public List<Horario> getListaDisp() {
+        return listaDisp;
     }
 }

@@ -73,7 +73,7 @@ public class DialogoCalendarioTutor extends JDialog {
                 c.setBackground(Color.WHITE);
 
                 if (column > 0 && tutor != null) {
-                    DayOfWeek dia = DayOfWeek.of(column); // Lunes = 1
+                    DayOfWeek dia = DayOfWeek.of(column);
                     LocalTime horaInicioBloque = obtenerHoraDesdeFila(row);
 
                     for (Horario h : tutor.getListaDisp()) {
@@ -94,23 +94,22 @@ public class DialogoCalendarioTutor extends JDialog {
 
         JButton btnBuscarClase = new JButton("Modificar Horario o Cancelar Horario");
         btnBuscarClase.addActionListener(e -> {
-            Set<DialogoSeleccionHorario.BloqueHorario> bloquesActuales = new HashSet<>();
+            Set<PanelSeleccionHorario.BloqueHorario> bloquesActuales = new HashSet<>();
             for (Horario h : tutor.getListaDisp()) {
-                int fila = h.getHoraInicio().getHour() - 8;
+                int fila = obtenerFilaDesdeHora(h.getHoraInicio());
                 int columna = h.getDia().getValue();
-                DialogoSeleccionHorario.BloqueHorario bloque = new DialogoSeleccionHorario.BloqueHorario(fila, columna);
-                bloquesActuales.add(bloque);
+                bloquesActuales.add(new PanelSeleccionHorario.BloqueHorario(fila, columna));
             }
 
-            DialogoSeleccionHorario dialogo = new DialogoSeleccionHorario(DialogoCalendarioTutor.this);
-            dialogo.setBloquesSeleccionados(bloquesActuales);
+            DialogoSeleccionHorario dialogo = new DialogoSeleccionHorario(DialogoCalendarioTutor.this, bloquesActuales);
             dialogo.setVisible(true);
 
-            Set<DialogoSeleccionHorario.BloqueHorario> nuevosBloques = dialogo.getBloquesSeleccionados();
-            if (nuevosBloques != null) {
+            if (dialogo.isGuardado()) {
+                Set<PanelSeleccionHorario.BloqueHorario> nuevosBloques = dialogo.getBloquesSeleccionados();
+
                 tutor.limpiarHorarios();
 
-                for (DialogoSeleccionHorario.BloqueHorario bloque : nuevosBloques) {
+                for (PanelSeleccionHorario.BloqueHorario bloque : nuevosBloques) {
                     if (bloque.columna < 1 || bloque.columna > 7) continue;
 
                     try {
@@ -145,5 +144,17 @@ public class DialogoCalendarioTutor extends JDialog {
 
     private boolean timeBetween(LocalTime x, LocalTime a, LocalTime b) {
         return (x.equals(a) || x.isAfter(a)) && x.isBefore(b);
+    }
+
+    private int obtenerFilaDesdeHora(LocalTime hora) {
+        for (int i = 0; i < FRANJAS.length; i++) {
+            String franja = FRANJAS[i];
+            String horaInicioStr = franja.split(" - ")[0];
+            LocalTime horaInicio = LocalTime.parse(horaInicioStr);
+            if (hora.equals(horaInicio)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

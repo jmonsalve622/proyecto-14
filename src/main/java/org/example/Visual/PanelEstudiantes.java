@@ -19,14 +19,16 @@ public class PanelEstudiantes extends JPanel {
     private DefaultListModel<Estudiante> modeloEstudiantes;
     private ListaPerfiles gestor;
     private EstudianteFactory estudianteFactory;
+    private List listaTutores;
 
     /*
     Aca esta el constructor del panel, aca es donde esta el boton de agregado de estudiantes y tambien es donde permite
     la lista de estudiantes y su info
      */
-    public PanelEstudiantes(ListaPerfiles gestor, EstudianteFactory estudianteFactory) {
+    public PanelEstudiantes(ListaPerfiles gestor, EstudianteFactory estudianteFactory, List listaTutores) {
         this.gestor = gestor;
         this.estudianteFactory = estudianteFactory;
+        this.listaTutores = listaTutores;
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Estudiantes"));
 
@@ -41,7 +43,7 @@ public class PanelEstudiantes extends JPanel {
             if (!e.getValueIsAdjusting()) {
                 Estudiante seleccionado = listaEstudiantes.getSelectedValue();
                 if (seleccionado != null) {
-                    DialogoInfoEstudiante infoDialog = new DialogoInfoEstudiante((JFrame) SwingUtilities.getWindowAncestor(this), seleccionado);
+                    DialogoInfoEstudiante infoDialog = new DialogoInfoEstudiante((Window) SwingUtilities.getWindowAncestor(this), seleccionado, listaTutores);
                     infoDialog.setVisible(true);
                 }
             }

@@ -15,15 +15,17 @@ public class DialogoInfoTutor extends JDialog {
      */
     private JTextArea areaInfo;
     private Tutor tutor;
+    private boolean soloLectura;
 
     /*
     Este es el constructor de la clase, aca es donde se establecera el tamaño de la ventana con la info del tutor y
     donde tambien se podra modificar la info y ver su calendario, en el que el mismo calendario se podra filtrar
     las mismas clases que tendra el tutor con los estudiantes
      */
-    public DialogoInfoTutor(JFrame parent, Tutor tutor) {
+    public DialogoInfoTutor(JFrame parent, Tutor tutor, boolean soloLectura) {
         super(parent, "Información del Tutor", true);
         this.tutor = tutor;
+        this.soloLectura = soloLectura;
 
         setSize(400, 300);
         setLocationRelativeTo(parent);
@@ -36,15 +38,18 @@ public class DialogoInfoTutor extends JDialog {
         add(new JScrollPane(areaInfo), BorderLayout.CENTER);
 
         JPanel panelBotones = new JPanel();
-        JButton btnModificar = new JButton("Modificar Info");
-        JButton btnCalendario = new JButton("Calendario");
 
-        panelBotones.add(btnModificar);
-        panelBotones.add(btnCalendario);
+        if (!soloLectura) {
+            JButton btnModificar = new JButton("Modificar Info");
+            btnModificar.addActionListener(e -> modificarInfoTutor());
+            panelBotones.add(btnModificar);
+
+            JButton btnCalendario = new JButton("Calendario");
+            btnCalendario.addActionListener(e -> abrirDialogoCalendario());
+            panelBotones.add(btnCalendario);
+        }
+
         add(panelBotones, BorderLayout.SOUTH);
-
-        btnModificar.addActionListener(e -> modificarInfoTutor());
-        btnCalendario.addActionListener(e -> abrirDialogoCalendario());
     }
 
     /*

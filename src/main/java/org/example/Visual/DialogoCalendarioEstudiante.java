@@ -3,9 +3,12 @@ package org.example.Visual;
 import org.example.Logic.*;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 import java.awt.*;
+import java.time.*;
+import java.time.format.*;
 import java.util.Vector;
+import java.util.List;
 
 /*
 Esta clase es la que crea el calendario que sera mostrado en la info de cada estudiante de manera independiente
@@ -19,6 +22,7 @@ public class DialogoCalendarioEstudiante extends JDialog {
     private JTable tablaHorario;
     private DefaultTableModel modeloTabla;
     private Estudiante estudiante;
+    private List<Tutor> listaTutores;
 
     private static final String[] COLUMNAS = {
             "Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"
@@ -35,9 +39,10 @@ public class DialogoCalendarioEstudiante extends JDialog {
     funcionalidad, hasta apretar un boton que te permita elegir uno de los bloques marcados que son las clases libres
     que tendra algun tutor disponible
      */
-    public DialogoCalendarioEstudiante(JFrame parent, Estudiante estudiante) {
+    public DialogoCalendarioEstudiante(JFrame parent, Estudiante estudiante, List<Tutor> listaTutores) {
         super(parent, "Calendario del Estudiante", true);
         this.estudiante = estudiante;
+        this.listaTutores = listaTutores;
         setSize(1000, 500);
         setLocationRelativeTo(parent);
         setLayout(new BorderLayout());
@@ -58,25 +63,53 @@ public class DialogoCalendarioEstudiante extends JDialog {
             }
         };
         tablaHorario.setRowHeight(35);
+        tablaHorario.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                c.setBackground(Color.WHITE);
+
+                if (column > 0 && estudiante != null) {
+                    DayOfWeek dia = DayOfWeek.of(column);
+                    LocalTime horaInicioBloque = obtenerHoraDesdeFila(row);
+
+                    for (Horario h : estudiante.getListaDisp()) {
+                        if (h.getDia().equals(dia) && timeBetween(horaInicioBloque, h.getHoraInicio(), h.getHoraFin())) {
+                            c.setBackground(Color.RED);
+                            break;
+                        }
+                    }
+                }
+
+                return c;
+            }
+        });
+
         add(new JScrollPane(tablaHorario), BorderLayout.CENTER);
 
         JPanel panelBotones = new JPanel();
 
-        JButton btnCancelarClase = new JButton("Cancelar clase");
-        btnCancelarClase.addActionListener(e -> {
+        JButton btnVerClase = new JButton("Ver Clases");
+        btnVerClase.addActionListener(e -> {
         });
 
-        JButton btnFiltrar = new JButton("Filtrar");
-        btnFiltrar.addActionListener(e -> {
-        });
-        //aun falta hacer el codigo para los botones
         JButton btnBuscarClase = new JButton("Buscar Clase");
         btnBuscarClase.addActionListener(e -> {
+            DialogoListaTutores dialogo = new DialogoListaTutores((JFrame) SwingUtilities.getWindowAncestor(this), (List<Tutor>) listaTutores, estudiante);
+            dialogo.setVisible(true);
         });
 
-        panelBotones.add(btnCancelarClase);
-        panelBotones.add(btnFiltrar);
+        panelBotones.add(btnVerClase);
         panelBotones.add(btnBuscarClase);
         add(panelBotones, BorderLayout.SOUTH);
+    }
+
+    private LocalTime obtenerHoraDesdeFila(int fila) {
+        String franja = FILAS[fila];
+        return LocalTime.parse(franja.split(" - ")[0], DateTimeFormatter.ofPattern("H:mm"));
+    }
+
+    private boolean timeBetween(LocalTime x, LocalTime a, LocalTime b) {
+        return (x.equals(a) || x.isAfter(a)) && x.isBefore(b);
     }
 }

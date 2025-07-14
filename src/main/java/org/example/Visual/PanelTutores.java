@@ -64,7 +64,7 @@ public class PanelTutores extends JPanel {
                         .findFirst()
                         .orElse(null);
                 if (seleccionado != null) {
-                    DialogoInfoTutor infoDialog = new DialogoInfoTutor(frame, seleccionado);
+                    DialogoInfoTutor infoDialog = new DialogoInfoTutor(frame, seleccionado, false);
                     infoDialog.setVisible(true);
                 }
             }

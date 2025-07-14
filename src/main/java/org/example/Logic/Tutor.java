@@ -119,4 +119,8 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
         return resultado;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

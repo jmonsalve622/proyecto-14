@@ -26,11 +26,12 @@ public class DialogoAgregarTutor extends JDialog {
     private JTextField campoMaxEstudiantes;
     private DefaultListModel<String> modeloMaterias;
     private JList<String> listaMaterias;
-    private Set<DialogoSeleccionHorario.BloqueHorario> bloquesSeleccionados = new HashSet<>();
+    private Set<PanelSeleccionHorario.BloqueHorario> bloquesSeleccionados = new HashSet<>();
 
     private TutorFactory tutorFactory;
     private boolean guardado = false;
     private Tutor tutorCreado;
+    private JFrame ventanaPrincipal;
 
     /*
     Aca tenemos el constructor, aca es donde se define el tamaño y el como sera proporcionado los campos donde
@@ -63,7 +64,7 @@ public class DialogoAgregarTutor extends JDialog {
 
         JButton btnHorarios = new JButton("Definir Horarios Disponibles");
         btnHorarios.addActionListener(e -> {
-            DialogoSeleccionHorario dialogo = new DialogoSeleccionHorario(this);
+            DialogoSeleccionHorario dialogo = new DialogoSeleccionHorario(this, bloquesSeleccionados);
             dialogo.setVisible(true);
             bloquesSeleccionados = dialogo.getBloquesSeleccionados();
         });
@@ -134,7 +135,7 @@ public class DialogoAgregarTutor extends JDialog {
                 tutorCreado.agregarMateria(materia);
             }
             guardado = true;
-            for (DialogoSeleccionHorario.BloqueHorario bloque : bloquesSeleccionados) {
+            for (PanelSeleccionHorario.BloqueHorario bloque : bloquesSeleccionados) {
                 try {
                     int diaInt = bloque.columna;
                     if (diaInt < 1 || diaInt > 7) {

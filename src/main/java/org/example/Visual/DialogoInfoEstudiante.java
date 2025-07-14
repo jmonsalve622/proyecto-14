@@ -4,6 +4,7 @@ import org.example.Logic.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class DialogoInfoEstudiante extends JDialog {
     /*
@@ -12,15 +13,17 @@ public class DialogoInfoEstudiante extends JDialog {
      */
     private JTextArea areaInfo;
     private Estudiante estudiante;
+    private List<Tutor> listaTutores;
 
     /*
     Este es el constructor de la clase, aca es donde se establecera el tamaño de la ventana con la info de los
     estudiantes, donde tambien se podra modificar la info y ver su calendario, en el que el mismo calendario
     se podra realizar reservas de clases con los tutores disponibles en los horarios pedidos
      */
-    public DialogoInfoEstudiante(Window parent, Estudiante estudiante) {
+    public DialogoInfoEstudiante(Window parent, Estudiante estudiante, List<Tutor> listaTutores){
         super(parent, "Información del Estudiante", ModalityType.APPLICATION_MODAL);
         this.estudiante = estudiante;
+        this.listaTutores = listaTutores;
 
         setSize(400, 250);
         setLocationRelativeTo(parent);
@@ -58,7 +61,7 @@ public class DialogoInfoEstudiante extends JDialog {
     }
 
     private void abrirDialogoCalendario() {
-        DialogoCalendarioEstudiante dialogoCalendario = new DialogoCalendarioEstudiante((JFrame) getParent(), estudiante);
+        DialogoCalendarioEstudiante dialogoCalendario = new DialogoCalendarioEstudiante((JFrame) getParent(), estudiante, listaTutores);
         dialogoCalendario.setVisible(true);
     }
 
