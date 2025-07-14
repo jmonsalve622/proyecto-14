@@ -35,6 +35,20 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
         this.maxEst = maxEst;
     }
 
+    public void agregarMateria(String materia) {
+        String upperMateria = materia.toUpperCase();
+        boolean repetido = false;
+        for (String m : listaMaterias) {
+            if (materia.equals(upperMateria)) {
+                repetido = true;
+                break;
+            }
+        }
+        if (!repetido) {
+            listaMaterias.add(upperMateria);
+        }
+    }
+    
     public boolean eliminarMateria(String materia) {
         String upperMateria = materia.toUpperCase();
         return listaMaterias.remove(upperMateria);
