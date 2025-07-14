@@ -8,7 +8,6 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
     private int tarifa;
     private int maxEst;
     private List<String> listaMaterias = new ArrayList<>();
-    private List<Horario> listaDisp = new ArrayList<>();
 
     public Tutor(String nombre, String correo, int id, int tarifa, int maxEst) {
         super(nombre, correo, id);
@@ -26,10 +25,6 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
 
     public List<String> getListaMaterias() {
         return listaMaterias;
-    }
-
-    public List<Horario> getListaDisp() {
-        return listaDisp;
     }
 
     public void setTarifa(int tarifa) {
@@ -53,23 +48,10 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
             listaMaterias.add(upperMateria);
         }
     }
-
-    public void limpiarHorarios() {
-        listaDisp.clear();
-    }
-
+    
     public boolean eliminarMateria(String materia) {
         String upperMateria = materia.toUpperCase();
         return listaMaterias.remove(upperMateria);
-    }
-
-    public void agregarHorario(Horario horario) throws ConflicoDeHorarioException {
-        for (Horario h : listaDisp) {
-            if (horario.conflictoTiempo(h)) {
-                throw new ConflicoDeHorarioException();
-            }
-        }
-        listaDisp.add(horario);
     }
 
     @Override
@@ -117,10 +99,5 @@ public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCa
             }
         }
         return resultado;
-    }
-
-    @Override
-    public String toString() {
-        return nombre;
     }
 }
