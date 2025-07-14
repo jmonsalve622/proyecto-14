@@ -9,6 +9,7 @@ import java.util.Set;
 public class Tutor extends Perfil implements CancelarClase, Observador, FiltroCalendario {
     private int tarifa;
     private int maxEst;
+    private int actEst= 0;
     private List<Estudiante> estudiantesAsignados = new ArrayList<>();
     private Set<TutorObserver> observadores = new HashSet<>();
     private List<String> listaMaterias = new ArrayList<>();

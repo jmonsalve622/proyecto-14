@@ -44,6 +44,11 @@ public abstract class Perfil {
         this.correo = correo;
     }
 
+    /**
+     *
+     * @param horario que se quiere agregar a listaDisp
+     * @throws ConflicoDeHorarioException superposición de horario con los que ya hay en listDisp
+     */
     public void agregarHorario(Horario horario) throws ConflicoDeHorarioException {
         for (Horario h : listaDisp) {
             if (horario.conflictoTiempo(h)) {
@@ -53,10 +58,17 @@ public abstract class Perfil {
         listaDisp.add(horario);
     }
 
+    /**
+     * Vaciá la lista listaDisp
+     */
     public void limpiarHorarios() {
         listaDisp.clear();
     }
 
+    /**
+     *
+     * @return devuelve el nombre del perfil
+     */
     @Override
     public String toString() {
         return nombre;
