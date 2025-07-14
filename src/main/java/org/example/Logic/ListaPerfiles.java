@@ -12,6 +12,10 @@ public class ListaPerfiles implements BuscarClase{
         tutores = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param perfil que se quiere agregar a una de las dos listas
+     */
     public void agregarPerfil(Perfil perfil) {
         if (perfil instanceof Estudiante) {
             estudiantes.add((Estudiante) perfil);
@@ -20,18 +24,28 @@ public class ListaPerfiles implements BuscarClase{
         }
     }
 
-    public Estudiante buscarEstudiante(String nombre) {
+    /**
+     *
+     * @param id del Estudiante que se quiere buscar en la lista de estudiantes
+     * @return instancia del Estudiante si esta en la lista, null si es que no
+     */
+    public Estudiante buscarEstudiante(int id) {
         for (Estudiante e : estudiantes) {
-            if (e.getNombre().equalsIgnoreCase(nombre)) {
+            if (e.getId() == id) {
                 return e;
             }
         }
         return null;
     }
 
-    public Tutor buscarTutor(String nombre) {
+    /**
+     *
+     * @param id del Tutor que se quiere buscar en la lista de tutores
+     * @return instancia del Tutor si esta en la lista, null si es que no
+     */
+    public Tutor buscarTutor(int id) {
         for (Tutor t : tutores) {
-            if (t.getNombre().equalsIgnoreCase(nombre)) {
+            if (t.getId() == id) {
                 return t;
             }
         }
