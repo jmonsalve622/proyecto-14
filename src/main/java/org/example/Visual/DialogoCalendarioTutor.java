@@ -150,7 +150,8 @@ public class DialogoCalendarioTutor extends JDialog {
         for (int i = 0; i < FRANJAS.length; i++) {
             String franja = FRANJAS[i];
             String horaInicioStr = franja.split(" - ")[0];
-            LocalTime horaInicio = LocalTime.parse(horaInicioStr);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
+            LocalTime horaInicio = LocalTime.parse(horaInicioStr, formatter);
             if (hora.equals(horaInicio)) {
                 return i;
             }
